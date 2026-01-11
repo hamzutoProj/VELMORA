@@ -10,18 +10,15 @@
     <style>
         body { font-family: 'Manrope', sans-serif; background-color: #020617; color: #f8fafc; overflow-x: hidden; }
         .glass-container { background: rgba(30, 41, 59, 0.4); backdrop-filter: blur(20px); border: 1px solid rgba(255, 255, 255, 0.08); border-radius: 32px; }
-        .input-field { background: rgba(15, 23, 42, 0.8); border: 1px solid rgba(255, 255, 255, 0.1); transition: all 0.3s; color: white; }
+        .input-field { background: rgba(15, 23, 42, 0.8); border: 1px solid rgba(255, 255, 255, 0.1); transition: all 0.3s; color: white; font-size: 16px; }
         .input-field:focus { border-color: #8b5cf6; box-shadow: 0 0 20px rgba(139, 92, 246, 0.2); outline: none; }
         .role-card { background: rgba(255, 255, 255, 0.02); border: 1px solid rgba(255, 255, 255, 0.05); transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); cursor: pointer; }
         .role-card:active { transform: scale(0.96); background: rgba(255, 255, 255, 0.05); }
         .loader { width: 24px; height: 24px; border: 3px solid rgba(255,255,255,0.3); border-radius: 50%; border-top-color: #fff; animation: spin 0.8s linear infinite; }
         @keyframes spin { to { transform: rotate(360deg); } }
-        
-        /* Галерея відгуків */
         .reviews-slider { display: flex; overflow-x: auto; scroll-snap-type: x mandatory; gap: 12px; padding-bottom: 10px; }
         .reviews-slider::-webkit-scrollbar { display: none; }
         .review-item { min-width: 260px; scroll-snap-align: center; background: rgba(255, 255, 255, 0.03); border: 1px solid rgba(255,255,255,0.05); border-radius: 24px; padding: 16px; }
-        
         .animate-fade-up { animation: fadeUp 0.4s ease-out forwards; }
         @keyframes fadeUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
     </style>
@@ -29,27 +26,22 @@
 <body class="min-h-screen flex flex-col items-center p-4 pb-12">
 
     <div class="mt-8 mb-6 text-center animate-fade-up">
-        <h1 class="text-4xl font-extrabold tracking-tight bg-clip-text text-transparent bg-gradient-to-r from-violet-400 to-blue-400">
-            KarierOK
-        </h1>
+        <h1 class="text-4xl font-extrabold tracking-tight bg-clip-text text-transparent bg-gradient-to-r from-violet-400 to-blue-400">KarierOK</h1>
         <p class="text-slate-400 text-[10px] font-bold mt-1 uppercase tracking-[0.3em]">Premium HR System</p>
     </div>
 
     <div id="reviews-section" class="w-full max-w-md mb-8 animate-fade-up" style="animation-delay: 0.1s;">
         <div class="flex justify-between items-center mb-4 px-2">
-            <h3 class="text-sm font-bold text-slate-200">Відгуки клієнтів</h3>
-            <span class="text-[10px] text-slate-500 uppercase font-bold">Гортайте →</span>
+            <h3 class="text-sm font-bold text-slate-200 text-center flex-1">Довіра наших клієнтів</h3>
         </div>
         <div id="reviews-list" class="reviews-slider">
-            <div class="review-item flex items-center justify-center h-24 italic text-slate-500 text-xs">
-                Завантаження відгуків...
-            </div>
+            <div class="review-item flex items-center justify-center h-24 italic text-slate-500 text-xs">Завантаження відгуків...</div>
         </div>
     </div>
 
     <div class="glass-container w-full max-w-md p-6 shadow-2xl relative overflow-hidden animate-fade-up" style="animation-delay: 0.2s;">
         <div id="step1">
-            <h2 class="text-xl font-bold mb-6 text-center text-white">Хто ви сьогодні?</h2>
+            <h2 class="text-xl font-bold mb-6 text-center text-white text-center">Оберіть напрямок</h2>
             <div class="grid gap-3">
                 <div onclick="setRole('recruiter')" class="role-card p-4 rounded-2xl flex items-center space-x-4 border-l-4 border-l-blue-500">
                     <div class="p-3 bg-blue-500/10 text-blue-400 rounded-xl"><i data-lucide="search" class="w-5 h-5"></i></div>
@@ -65,7 +57,7 @@
                 </div>
                 <div onclick="setRole('review')" class="role-card p-4 rounded-2xl flex items-center space-x-4 border-l-4 border-l-violet-500">
                     <div class="p-3 bg-violet-500/10 text-violet-400 rounded-xl"><i data-lucide="star" class="w-5 h-5"></i></div>
-                    <div class="flex-1"><b class="block text-white text-sm">Відгук</b><span class="text-[10px] text-slate-500 uppercase">Поділитись досвідом</span></div>
+                    <div class="flex-1"><b class="block text-white text-sm">Відгук</b><span class="text-[10px] text-slate-500 uppercase">Оцінити сервіс</span></div>
                 </div>
             </div>
         </div>
@@ -73,65 +65,53 @@
         <form id="mainForm" class="hidden space-y-5">
             <input type="hidden" name="role" id="roleInput">
             <div id="dynamicFields" class="space-y-4"></div>
-
-            <button type="button" id="submitBtn" onclick="sendData()" class="w-full bg-gradient-to-r from-violet-600 to-indigo-600 py-4 rounded-2xl font-bold text-white shadow-xl flex items-center justify-center space-x-2 active:scale-95 transition-all">
-                <span id="btnText">Надіслати заявку</span>
+            <button type="button" id="submitBtn" onclick="sendData()" class="w-full bg-gradient-to-r from-violet-600 to-indigo-600 py-4 rounded-2xl font-bold text-white shadow-xl flex items-center justify-center space-x-2 active:scale-95 transition-all mt-4">
+                <span id="btnText">Надіслати</span>
                 <i id="btnIcon" data-lucide="arrow-right" class="w-5 h-5"></i>
             </button>
-            
-            <button type="button" onclick="goBack()" class="w-full text-slate-500 text-[10px] font-bold uppercase tracking-widest py-2">
-                ← На головну
-            </button>
+            <button type="button" onclick="goBack()" class="w-full text-slate-500 text-[10px] font-bold uppercase tracking-widest py-2">← Назад</button>
         </form>
 
         <div id="success" class="hidden py-10 text-center space-y-4">
-            <div class="w-20 h-20 bg-emerald-500/10 text-emerald-400 rounded-full flex items-center justify-center mx-auto mb-4 border border-emerald-500/20">
-                <i data-lucide="check" class="w-10 h-10"></i>
-            </div>
-            <h2 class="text-2xl font-bold text-white">Успішно!</h2>
-            <p class="text-slate-400 text-sm px-6">Ваша інформація вже у нас. Менеджер зв'яжеться з вами найближчим часом.</p>
+            <div class="w-20 h-20 bg-emerald-500/10 text-emerald-400 rounded-full flex items-center justify-center mx-auto mb-4 border border-emerald-500/20"><i data-lucide="check" class="w-10 h-10"></i></div>
+            <h2 class="text-2xl font-bold text-white">Дякуємо!</h2>
+            <p class="text-slate-400 text-sm px-6">Ваша заявка успішно надіслана. Менеджер зв'яжеться з вами найближчим часом.</p>
             <button onclick="goBack()" class="mt-6 text-violet-400 font-bold underline text-sm">На головну</button>
         </div>
     </div>
 
     <script>
         const tg = window.Telegram.WebApp;
-        const API_URL = "https://script.google.com/macros/s/AKfycbw2NU7sksd3jd8O1kkGnmomtNFb5W5QKl-o221RiHxVhtjelZjXuRD0tvawj0lhtzmvdg/exec";
+        const API_URL = "ВАШЕ_ПОСИЛАННЯ_ТУТ"; 
         
         tg.expand();
         lucide.createIcons();
 
-        // 1. Завантаження відгуків
         async function loadReviews() {
             try {
                 const res = await fetch(`${API_URL}?action=getReviews`);
                 const reviews = await res.json();
                 const container = document.getElementById('reviews-list');
-                
                 if (reviews.length === 0) {
                     container.innerHTML = `<div class="review-item text-center italic text-slate-500 text-xs">Відгуків поки немає. Будьте першим!</div>`;
                     return;
                 }
-
                 container.innerHTML = reviews.map(r => `
                     <div class="review-item flex flex-col justify-between">
                         <p class="text-xs text-slate-300 leading-relaxed italic line-clamp-3">"${r.text}"</p>
                         <div class="flex justify-between items-center mt-3 border-t border-white/5 pt-2">
-                            <span class="text-[10px] font-bold text-violet-400 uppercase">${r.name}</span>
-                            <span class="text-yellow-500 text-[10px]">${'⭐'.repeat(r.rating)}</span>
+                            <span class="text-[10px] font-bold text-violet-400 uppercase tracking-tighter">${r.name}</span>
+                            <span class="text-yellow-500 text-[10px] font-bold tracking-widest">${'★'.repeat(r.rating)}${'☆'.repeat(5-r.rating)}</span>
                         </div>
                     </div>
                 `).join('');
-            } catch (e) {
-                console.log("Reviews load error");
-            }
+            } catch (e) { console.log("Load error"); }
         }
 
         function setRole(role) {
             tg.HapticFeedback.impactOccurred('medium');
             document.getElementById('step1').classList.add('hidden');
-            document.getElementById('reviews-section').classList.add('hidden'); // Приховуємо відгуки при заповненні
-            
+            document.getElementById('reviews-section').classList.add('hidden');
             const form = document.getElementById('mainForm');
             const fields = document.getElementById('dynamicFields');
             document.getElementById('roleInput').value = role;
@@ -139,45 +119,37 @@
 
             let html = '';
             if(role === 'recruiter') {
-                html = `
-                    <input type="text" name="name" placeholder="Ваше ім'я" class="input-field w-full p-4 rounded-2xl" required>
-                    <input type="text" name="tgNick" placeholder="Telegram @username" class="input-field w-full p-4 rounded-2xl" required>
-                    <textarea name="comment" placeholder="Ваша спеціалізація або коментар" class="input-field w-full p-4 rounded-2xl h-24"></textarea>
-                `;
+                html = `<input type="text" name="name" placeholder="Ваше ім'я" class="input-field w-full p-4 rounded-2xl" required>
+                        <input type="text" name="tgNick" placeholder="Telegram @username" class="input-field w-full p-4 rounded-2xl" required>
+                        <textarea name="comment" placeholder="Ваш коментар" class="input-field w-full p-4 rounded-2xl h-24"></textarea>`;
             } else if(role === 'candidate') {
-                html = `
-                    <input type="text" name="vacancy" placeholder="На яку вакансію?" class="input-field w-full p-4 rounded-2xl" required>
-                    <input type="text" name="contacts" placeholder="Ваш телефон або email" class="input-field w-full p-4 rounded-2xl" required>
-                    <input type="text" name="inviter" placeholder="Хто вас запросив?" class="input-field w-full p-4 rounded-2xl">
-                `;
+                html = `<input type="text" name="vacancy" placeholder="На яку вакансію?" class="input-field w-full p-4 rounded-2xl" required>
+                        <input type="text" name="contacts" placeholder="Ваш телефон або email" class="input-field w-full p-4 rounded-2xl" required>
+                        <input type="text" name="inviter" placeholder="Хто вас запросив?" class="input-field w-full p-4 rounded-2xl">`;
             } else if(role === 'client') {
-                html = `
-                    <input type="text" name="company" placeholder="Назва компанії" class="input-field w-full p-4 rounded-2xl" required>
-                    <input type="text" name="clientName" placeholder="Ваше ім'я" class="input-field w-full p-4 rounded-2xl" required>
-                    <input type="text" name="contacts" placeholder="Ваш контакт" class="input-field w-full p-4 rounded-2xl" required>
-                    <div class="bg-slate-900/50 p-4 rounded-3xl border border-white/5">
-                        <label class="text-[10px] font-black text-slate-500 uppercase tracking-tighter">Кількість вакансій</label>
-                        <div class="flex justify-between items-center mt-1">
-                             <input type="number" id="vC" name="vacancies" value="1" min="1" oninput="calc()" class="bg-transparent text-2xl font-bold text-violet-400 outline-none w-20">
-                             <span id="pr" class="text-sm font-bold text-white bg-white/5 px-4 py-1 rounded-full border border-white/10">4000 грн</span>
-                        </div>
-                    </div>
-                `;
+                html = `<input type="text" name="company" placeholder="Назва компанії" class="input-field w-full p-4 rounded-2xl" required>
+                        <input type="text" name="clientName" placeholder="Ваше ім'я" class="input-field w-full p-4 rounded-2xl" required>
+                        <input type="text" name="contacts" placeholder="Контакти для зв'язку" class="input-field w-full p-4 rounded-2xl" required>
+                        <div class="bg-slate-900/50 p-4 rounded-3xl border border-white/5">
+                            <label class="text-[10px] font-black text-slate-500 uppercase tracking-tighter">Кількість вакансій</label>
+                            <div class="flex justify-between items-center mt-1">
+                                 <input type="number" id="vC" name="vacancies" value="1" min="1" oninput="calc()" class="bg-transparent text-2xl font-bold text-violet-400 outline-none w-20">
+                                 <span id="pr" class="text-sm font-bold text-white bg-white/5 px-4 py-1 rounded-full border border-white/10 italic">4000 грн</span>
+                            </div>
+                        </div>`;
             } else if(role === 'review') {
-                html = `
-                    <input type="text" name="reviewerName" placeholder="Ваше ім'я" class="input-field w-full p-4 rounded-2xl" required>
-                    <div class="bg-slate-900/50 p-4 rounded-3xl border border-white/5">
-                        <label class="text-[10px] font-black text-slate-500 uppercase mb-2 block tracking-tighter">Ваша оцінка</label>
-                        <select name="rating" class="w-full bg-transparent text-lg font-bold text-yellow-500 outline-none">
-                            <option value="5" class="bg-slate-900">⭐⭐⭐⭐⭐ 5 / 5</option>
-                            <option value="4" class="bg-slate-900">⭐⭐⭐⭐ 4 / 5</option>
-                            <option value="3" class="bg-slate-900">⭐⭐⭐ 3 / 5</option>
-                            <option value="2" class="bg-slate-900">⭐⭐⭐ 2 / 5</option>
-                            <option value="1" class="bg-slate-900">⭐⭐⭐ 1 / 5</option>
-                        </select>
-                    </div>
-                    <textarea name="reviewText" placeholder="Напишіть кілька слів про досвід роботи з нами..." class="input-field w-full p-4 rounded-2xl h-24" required></textarea>
-                `;
+                html = `<input type="text" name="reviewerName" placeholder="Ваше ім'я" class="input-field w-full p-4 rounded-2xl" required>
+                        <div class="bg-slate-900/50 p-4 rounded-3xl border border-white/5">
+                            <label class="text-[10px] font-black text-slate-500 uppercase mb-2 block tracking-tighter text-center">Ваша оцінка</label>
+                            <select name="rating" class="w-full bg-transparent text-lg font-bold text-yellow-500 outline-none text-center">
+                                <option value="5" class="bg-slate-900">⭐⭐⭐⭐⭐ 5 / 5</option>
+                                <option value="4" class="bg-slate-900">⭐⭐⭐⭐ 4 / 5</option>
+                                <option value="3" class="bg-slate-900">⭐⭐⭐ 3 / 5</option>
+                                <option value="2" class="bg-slate-900">⭐⭐ 2 / 5</option>
+                                <option value="1" class="bg-slate-900">⭐ 1 / 5</option>
+                            </select>
+                        </div>
+                        <textarea name="reviewText" placeholder="Напишіть відгук..." class="input-field w-full p-4 rounded-2xl h-24" required></textarea>`;
             }
             fields.innerHTML = html;
             lucide.createIcons();
@@ -190,12 +162,15 @@
             document.getElementById('step1').classList.remove('hidden');
             document.getElementById('reviews-section').classList.remove('hidden');
             document.getElementById('mainForm').reset();
-            loadReviews(); // Оновлюємо відгуки при поверненні
+            loadReviews();
         }
 
         function calc() {
-            const v = document.getElementById('vC').value;
-            let p = v == 1 ? 4000 : (v == 2 ? 6000 : 8000);
+            const v = parseInt(document.getElementById('vC').value) || 0;
+            let p = 0;
+            if (v === 1) p = 4000;
+            else if (v === 2) p = 6000;
+            else if (v >= 3) p = 8000 + (v - 3) * 2000; // Наприклад +2000 за кожну наступну після 3
             document.getElementById('pr').innerText = p + " грн";
             tg.HapticFeedback.selectionChanged();
         }
@@ -204,40 +179,26 @@
             const btn = document.getElementById('submitBtn');
             const btnText = document.getElementById('btnText');
             const form = document.getElementById('mainForm');
-            
             if (!form.reportValidity()) return;
-
-            const formData = new FormData(form);
-            const params = new URLSearchParams();
-            for (const [key, value] of formData.entries()) {
-                params.append(key, value);
-            }
-
+            const params = new URLSearchParams(new FormData(form));
             btn.disabled = true;
             btnText.innerHTML = '<div class="loader"></div>';
             tg.HapticFeedback.impactOccurred('heavy');
-
             try {
-                await fetch(API_URL + "?" + params.toString(), {
-                    method: 'GET',
-                    mode: 'no-cors'
-                });
-
+                await fetch(API_URL + "?" + params.toString(), { method: 'GET', mode: 'no-cors' });
                 setTimeout(() => {
                     tg.HapticFeedback.notificationOccurred('success');
                     form.classList.add('hidden');
                     document.getElementById('success').classList.remove('hidden');
                     btn.disabled = false;
-                    btnText.innerText = 'Надіслати заявку';
+                    btnText.innerText = 'Надіслати';
                 }, 1200);
-
             } catch (e) {
-                alert("Помилка з'єднання");
+                alert("Помилка");
                 btn.disabled = false;
-                btnText.innerText = 'Надіслати заявку';
+                btnText.innerText = 'Надіслати';
             }
         }
-
         window.onload = loadReviews;
     </script>
 </body>
